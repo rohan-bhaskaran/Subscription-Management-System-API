@@ -1,0 +1,37 @@
+{
+  "name": "subscription-tracker",
+  "version": "1.0.0",
+  "description": "A Subscription Management System API.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./backend/app.js",
+    "start": "node ./backend/app.js",
+    "lint": "eslint ."
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohan-bhaskaran/Subscription-Management-System-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohan-bhaskaran/Subscription-Management-System-API/issues"
+  },
+  "homepage": "https://github.com/rohan-bhaskaran/Subscription-Management-System-API#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.1",
+    "globals": "^17.9.0",
+    "nodemon": "^3.1.14"
+  }
+}
