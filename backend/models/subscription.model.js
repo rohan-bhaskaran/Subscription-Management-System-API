@@ -58,7 +58,7 @@ const subscriptionSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-subscriptionSchema.pre('save', function (next) {
+subscriptionSchema.pre('save', function () {
     if (this.startDate && this.frequency) {
         const renewal = new Date(this.startDate);
     
@@ -70,21 +70,20 @@ subscriptionSchema.pre('save', function (next) {
                 renewal.setDate(renewal.getDate() + 7);
                 break;
             case "monthly":
-                renewal.setDate(renewal.getMonth() + 1);
+                renewal.setMonth(renewal.getMonth() + 1);
                 break;
             case "yearly":
-                renewal.setDate(renewal.getFullYear() + 1);
+                renewal.setFullYear(renewal.getFullYear() + 1);
                 break;
         }
 
-        this.renewal = renewal;
+        this.renewalDate = renewal;
         if (this.renewal < new Date()) {
             this.status = "expired";
         }
     }
-    next();
 });
 
-const Subscription = new mongoose.model("Subscription", subscriptionSchema);
+const Subscription = mongoose.model("Subscription", subscriptionSchema);
 
 export default Subscription;

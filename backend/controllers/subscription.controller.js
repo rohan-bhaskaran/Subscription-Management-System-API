@@ -18,14 +18,14 @@ export const createSubscription = async (req, res, next) => {
 
 export const getUserSubscriptions = async (req, res, next) => {
     try {
-        const subscriptions = await Subscription.find({user: req.params.id});
+        const subscriptions = await Subscription.find({user: req.user._id});
         res.status(200).json({subscriptions});
     } catch (err) {
         next(err);
     }
 }
 
-export const getSubscriptionById = async (req, res) => {
+export const getSubscriptionById = async (req, res, next) => {
     try {
         const subscription = await Subscription.findById(req.params.id);
         if (!subscription) return res.status(404).json({error: "Subscription not found"});
@@ -36,7 +36,7 @@ export const getSubscriptionById = async (req, res) => {
     }
 }
 
-export const updateSubscription = async (req, res) => {
+export const updateSubscription = async (req, res, next) => {
     try {
         const subscription = await Subscription.findById(req.params.id);
         if (!subscription) return res.status(404).json({error: "Subscription not found"});
@@ -56,7 +56,7 @@ export const updateSubscription = async (req, res) => {
     }
 }
 
-export const deleteSubscription = async (req, res) => {
+export const deleteSubscription = async (req, res, next) => {
     try {
         const subscription = await Subscription.findById(req.params.id);
         if (!subscription) return res.status(404).json({error: "Subscription not found"}); 
@@ -68,7 +68,7 @@ export const deleteSubscription = async (req, res) => {
     }
 }
 
-export const cancelSubscription = async (req, res) => {
+export const cancelSubscription = async (req, res, next) => {
     try {
         const subscription = await Subscription.findById(req.params.id);
         if (!subscription) return res.status(404).json({error: "Subscription not found"}); 
@@ -82,7 +82,7 @@ export const cancelSubscription = async (req, res) => {
     }
 }
 
-export const getUpcomingRenewals = async (req, res) => {
+export const getUpcomingRenewals = async (req, res, next) => {
     try {
         const nextWeek = new Date();
         nextWeek.setDate(nextWeek.getDate() + 7);
