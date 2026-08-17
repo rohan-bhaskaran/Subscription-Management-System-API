@@ -78,7 +78,7 @@ subscriptionSchema.pre('save', function () {
         }
 
         this.renewalDate = renewal;
-        if (this.renewal < new Date()) {
+        if (this.renewalDate < new Date()) {
             this.status = "expired";
         }
     }

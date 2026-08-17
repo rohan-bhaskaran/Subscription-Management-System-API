@@ -84,9 +84,11 @@ export const cancelSubscription = async (req, res, next) => {
 
 export const getUpcomingRenewals = async (req, res, next) => {
     try {
+        const today = new Date();
         const nextWeek = new Date();
+        today.setHours(0,0,0,0);
         nextWeek.setDate(nextWeek.getDate() + 7);
-        const subscriptions = await Subscription.find({user: req.user._id ,status: "active" ,renewalDate: {$lte: nextWeek}}).sort({renewalDate: 1});
+        const subscriptions = await Subscription.find({user: req.user._id ,status: "active" ,renewalDate: {$gte: today, $lte: nextWeek}}).sort({renewalDate: 1});
         res.status(200).json({subscriptions});
     } catch (err) {
         next(err);

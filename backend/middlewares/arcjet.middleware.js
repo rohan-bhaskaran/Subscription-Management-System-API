@@ -1,4 +1,3 @@
-import express from "express";
 import {aj, emailAj} from "../config/arcjet.js";
 
 const protect = async (req , res, next) => {

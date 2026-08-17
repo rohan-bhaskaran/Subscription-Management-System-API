@@ -1,4 +1,4 @@
-export default email = ({ userName, subscriptionName, renewalDate, price, currency, daysLeft }) => {
+const generateReminderEmail = ({ userName, subscriptionName, renewalDate, price, currency, daysLeft }) => {
     const subject = `Your ${subscriptionName} subscription renews in ${daysLeft} days`;
 
   const html = `
@@ -45,3 +45,5 @@ export default email = ({ userName, subscriptionName, renewalDate, price, curren
 
   return { html , subject};
 }
+
+export default generateReminderEmail;

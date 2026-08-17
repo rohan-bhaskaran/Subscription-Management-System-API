@@ -7,8 +7,8 @@ import subscriptionRoutes from './routes/subscription.routes.js';
 import userRoutes from './routes/user.routes.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import {protect as arcjetMiddleware} from './middlewares/arcjet.middleware.js';
+import startReminderCron from './utils/cron.js';
 
-connectdb();
 const app = express();
 
 app.use(express.json());
@@ -20,4 +20,9 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/subscriptions', subscriptionRoutes);
 app.use(errorMiddleware);
 
-app.listen(PORT);
+connectdb().then(() => {
+    app.listen(PORT, () => {
+        console.log(`App is successfully running`);
+        startReminderCron();
+    });
+});
