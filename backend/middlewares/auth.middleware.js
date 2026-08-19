@@ -15,6 +15,12 @@ const check =  async (req, res, next) => {
     
         const user = await User.findById(authorized.userId);
         if (!user) return res.status(401).json({error: "Unauthorized: No such user"});
+        if (user.passwordChangedAt) {
+            const changedAt = Math.floor(user.passwordChangedAt.getTime() / 1000);
+            if (authorized.signedAt < changedAt) {
+                return res.status(401).json({error: 'Password changed. Please sign in again'});
+            }
+        }
         req.user = user;
         next();
     } catch (err) {

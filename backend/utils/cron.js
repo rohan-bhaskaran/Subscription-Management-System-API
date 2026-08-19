@@ -29,18 +29,19 @@ const startReminderCron = () => {
                         to: sub.user.email,
                         userName: sub.user.name,
                         subscriptionName: sub.name,
-                        renewalDate: sub.renewalDate.toDateString();
+                        renewalDate: sub.renewalDate.toDateString(),
                         price: sub.price,
-                        currency: sub.currency;
+                        currency: sub.currency,
                         daysLeft: day
-                    })
+                    });
+                    console.log(`Reminder sent → ${sub.user.email} | ${sub.name} | ${day} days`);
                 }
-                console.log(`Reminder sent → ${sub.user.email} | ${sub.name} | ${day} days`);
             } catch (err) {
                 console.log(`Error: Cron error for ${day}-day check: ${err.message}`);
             }
         }
     })
+    console.log("mail sent at 8 in morning");
 }
 
 export default startReminderCron;
